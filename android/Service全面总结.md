@@ -338,14 +338,15 @@ public class MainActivity extends Activity {
 判断Service是否正在运行：
 
 ```
-private boolean isServiceRunning() {
-    ActivityManager manager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-    
- 　{
-        if ("com.example.demo.BindService".equals(service.service.getClassName())) 　　{
-            return true;
-        }
-    }
-    return false;
-}
+private boolean isMyServiceRunning() {  
+    ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);  
+    for (RunningServiceInfo service : manager  
+            .getRunningServices(Integer.MAX_VALUE)) {  
+        if (AlarmService.class.getName().equals(  
+                service.service.getClassName()){  
+            return true;  
+        }  
+    }  
+    return false;  
+}  
 ```
